@@ -11,7 +11,7 @@ export class DataProviderService {
   constructor(private _http: HttpClient) { }
 
   getNewsDetails(id): Observable<string> {
-    return this._http.get<string>("https://content.guardianapis.com/" + id + "?show-fields=thumbnail,thumbnail,trailText,headline,body&show-tags=contributor" + "&api-key=" + this.API_KEY);
+    return this._http.get<string>("https://content.guardianapis.com/" + id + "?show-fields=thumbnail,thumbnail,trailText,headline&show-tags=contributor&show-blocks=body" + "&api-key=" + this.API_KEY);
   }
 
   getSectionNewsList(id, page: number = 1): Observable<string> {

@@ -11,12 +11,14 @@ import { Title } from '@angular/platform-browser';
 })
 export class NewsDetailComponent implements OnInit {
   newsDetails;
+  newsBody;
   constructor(private _dataProvider: DataProviderService, private _title: Title, private _activatedRoute: ActivatedRoute) { }
   ngOnInit() {
     this._activatedRoute.params.subscribe(params => {
       this._dataProvider.getNewsDetails(this.getUrlFromParameters(params)).subscribe(data => {
+        this._title.setTitle(data["response"]["content"]["fields"]["headline"] + " | New App ")
         this.newsDetails = data["response"]["content"];
-        console.log(this.newsDetails);
+        this.newsBody = this.newsDetails.blocks.body[0];
       })
     });
   }

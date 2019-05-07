@@ -1,7 +1,8 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a [routerLink]="[ '/' + newsDetails.sectionName.toLowerCase()]" href="#">{{ newsDetails.sectionName }}</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="[ '/' + newsDetails.sectionName.toLowerCase()]"
+        href="#">{{ newsDetails.sectionName }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ newsDetails.fields["headline"]   }}</li>
   </ol>
 </nav>
@@ -9,14 +10,28 @@
   <div class="col-lg-9">
     <div class="card">
       <div class="card-img-top">
-        <img src="{{ newsDetails.fields.thumbnail }}" />
+        <img class="img-fluid rounded" src="{{ newsDetails.fields.thumbnail }}" />
         <div class="news-headline">
-          <h4 class="card-title">{{ newsDetails.fields.headline }}</h4>
+          <h3 class="card-title">{{ newsDetails.fields.headline }}</h3>
+          <h6 class="card-title">{{ newsDetails.fields.trailText }}</h6>
         </div>
       </div>
       <div class="card-body">
-        <h5 class="card-title">{{ newsDetails.fields.trailText }}</h5>
-        <p class="card-text" [innerHTML]="newsDetails.body"></p>
+        <p class="card-text" *ngFor="let item of newsBody.elements">
+          <span *ngIf="item.type == 'text'">
+            <div [innerHTML]="item.textTypeData.html"></div>
+          </span>
+          <span *ngIf="item.type == 'rich-link'">
+            {{ item.richLinkTypeData.linkPrefix }} <a
+              [routerLink]="[ '/' + item.richLinkTypeData.originalUrl.replace('https://www.theguardian.com/','')]">{{  item.richLinkTypeData.linkText }}</a>
+          </span>
+          <span *ngIf="item.type == 'image'">
+            <figure class="figure">
+              <img src="{{ item.assets[item.assets.length - 3].file }}" alt="{{ item.imageTypeData.credit }}" class="figure-img img-fluid rounded">
+              <figcaption class="figure-caption text-center">{{ item.imageTypeData.caption }}</figcaption>
+            </figure>
+          </span>
+        </p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
