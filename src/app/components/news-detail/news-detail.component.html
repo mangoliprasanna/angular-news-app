@@ -1,0 +1,34 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="[ '/' + newsDetails.sectionName.toLowerCase()]" href="#">{{ newsDetails.sectionName }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ newsDetails.fields["headline"]   }}</li>
+  </ol>
+</nav>
+<div class="row">
+  <div class="col-lg-9">
+    <div class="card">
+      <div class="card-img-top">
+        <img src="{{ newsDetails.fields.thumbnail }}" />
+        <div class="news-headline">
+          <h4 class="card-title">{{ newsDetails.fields.headline }}</h4>
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ newsDetails.fields.trailText }}</h5>
+        <p class="card-text" [innerHTML]="newsDetails.body"></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h6>Related News</h6>
+        </li>
+        <li class="list-group-item">
+          <h6>Related News</h6>
+        </li>
+        <li class="list-group-item">
+          <h6>Related News</h6>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

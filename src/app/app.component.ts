@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataProviderService } from './services/data-provider.service';
-import { Utlities } from './utilities';
-import { BasicNews } from './interfaces/news-list';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +6,7 @@ import { BasicNews } from './interfaces/news-list';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  processor = new Utlities();
-  newsList: BasicNews[];
-  constructor(private _dataProvider: DataProviderService){
+  constructor(){
   }
   ngOnInit(): void {
     
@@ -30,6 +25,5 @@ export class AppComponent implements OnInit {
     })
 
     */
-    
   }
 }
